@@ -1,11 +1,17 @@
+import React from 'react'
+import CommentList from './CommentList'
+import CommentForm from './CommentForm'
+import $ from 'jquery'
+
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({
       url: this.props.url,
-      dataType: 'json',
       cache: false,
-      success: function(data) {
-        this.setState({data: data});
+      type: 'GET',
+      dataType: 'json',
+      success: function(incomingData) {
+        this.setState({data: incomingData});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -52,4 +58,4 @@ var CommentBox = React.createClass({
   }
 });
 
-export default CommentBox url="/api/comments" pollInterval={2000};
+export default CommentBox;
